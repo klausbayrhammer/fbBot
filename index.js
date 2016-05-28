@@ -1,9 +1,9 @@
 var express = require('express');
-const request = require('request');
+const sendTextMessage = require('./utils').sendTextMessage;
+const sendImageMessage = require('./utils').sendImageMessage;
 
 var bodyParser = require('body-parser');
 const VERIFY_TOKEN = 'thisIsTheHotShit';
-const PAGE_ACCESS_TOKEN = 'EAANRZAubz2BoBACqalZCPkekBGJ82MxpoDJC1fZAor0v3t5gGs9zFJ3oHHceLp2GKkNVJrhivgDN2sTIqyWPT4tArebBPYh62bjsnEmfHrZCazsDfyWJtGJccI2w8r6XKmGYGhXrVM9tz1tftUZAyhVJHh53JREBYkczgifiqRgZDZD'
 
 var app = express();
 app.use(bodyParser.json()); // for parsing application/json
@@ -28,33 +28,15 @@ app.post('/webhook/', function (req, res) {
         sender = event.sender.id;
         if (event.message && event.message.text) {
             text = event.message.text;
-            sendTextMessage(sender, text)
+            if(text === 'Hi')
+                sendTextMessage(sender, text);
+            else
+                sendImageMessage(sender, 'https://image.redbull.com/rbcom/010/2016-03-22/1331784064832_1/0010/1/150/100/1/nicolas-mller-beim-banked-slalom.jpg')
             console.log(event);
         }
     }
     res.sendStatus(200);
 });
-
-function sendTextMessage(sender, text) {
-    messageData = {
-        text:`callback ${text}`
-    }
-    request({
-        url: 'https://graph.facebook.com/v2.6/me/messages',
-        qs: {access_token:PAGE_ACCESS_TOKEN},
-        method: 'POST',
-        json: {
-            recipient: {id:sender},
-            message: messageData,
-        }
-    }, function(error, response, body) {
-        if (error) {
-            console.log('Error sending message: ', error);
-        } else if (response.body.error) {
-            console.log('Error: ', response.body.error);
-        }
-    });
-}
 
 var server = app.listen(process.env.PORT || 3000,() => {
     var host = server.address().address;
