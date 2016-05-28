@@ -31,7 +31,7 @@ module.exports = [
             if(event.message.text === 'Felix Baumgartner') {
                 sendTextMessage(sender, 'Great you did it')
             } else {
-                sendTextMessage('Sorry wrong answer')
+                sendTextMessage(sender, 'Sorry wrong answer')
             }
         }
     }
