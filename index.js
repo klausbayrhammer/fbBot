@@ -26,7 +26,9 @@ app.post('/webhook/', function (req, res) {
     for (i = 0; i < messaging_events.length; i++) {
         event = req.body.entry[0].messaging[i];
         sender = event.sender.id;
-        game(sender, event);
+        if(event.message && event.message.text) {
+            game(sender, event);
+        }
     }
     res.sendStatus(200);
 });
