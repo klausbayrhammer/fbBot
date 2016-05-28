@@ -1,6 +1,9 @@
 const sendTextMessage = require('../utils').sendTextMessage;
 const sendImageMessage = require('../utils').sendImageMessage;
+const searchForAthletes = require('../utils').searchForAthletes;
+const sendPostbackButtonMessage = require('../utils').sendPostbackButtonMessage;
 const request = require('request-promise');
+const _ = require('lodash');
 
 function getAthleteById(athleteId) {
     return request({
@@ -27,7 +30,22 @@ module.exports = {
         })
     },
     answer: (sender, event) => {
-        console.log('level 0 answer');
-        return Promise.resolve(event.message.text === 'Felix Baumgartner')
+        return new Promise(resolve => {
+            if (event.message && event.message.text === 'Felix Baumgartner' || event.postback && event.postback.payload === 'Felix Baumgartner') {
+                resolve({success: true})
+            }
+            if(event.message && event.message.text) {
+                return searchForAthletes(event.message.text).then(athletes => {
+                    if(!_.isEmpty(athletes)) {
+                        sendPostbackButtonMessage(sender, athletes);
+                        resolve({success:false, skipDefaultMessage:true})
+                    } else {
+                        resolve({success:false})
+                    }
+                })
+            } else {
+                resolve({success: false});
+            }
+        });
     }
 };

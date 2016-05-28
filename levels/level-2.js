@@ -7,6 +7,6 @@ module.exports = {
     },
     answer: (sender, event) => {
         console.log('Checking image', event.message.attachments[0].payload.url);
-        return checkIfRedbullFridgePic(event.message.attachments[0].payload.url)
+        return checkIfRedbullFridgePic(event.message.attachments[0].payload.url).then(result => ({success:result}))
     }
 };

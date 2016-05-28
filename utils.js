@@ -29,6 +29,8 @@ function sendImageMessage(sender, title, imageurl) {
 
 function sendPostbackButtonMessage(sender, buttonConfig) {
     const buttons = _.map(buttonConfig, e => ({type:'postback', title: e, payload: e}));
+    console.log('buttons', buttons);
+    console.log('buttonConfgi', buttonConfig);
     messageData = {
         "attachment": {
             "type": "template",
@@ -101,10 +103,7 @@ function searchForAthletes(query) {
         },
         json: true
     }).then(function(response) {
-
-        return response.result.map(function(resultObj){
-            return _.pick(resultObj, ['id', 'name', 'surname', 'firstname'])
-        })
+        return response.result.map(resultObj => resultObj.name)
     }).catch(error => {
         console.log('Error sending message: ', error);
     });

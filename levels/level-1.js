@@ -8,6 +8,6 @@ module.exports = {
     },
     answer: (sender, event) => {
         console.log('level 1 answer');
-        return Promise.resolve(event.message.text === '1987')
+        return Promise.resolve({success: event.message.text === '1987'})
     }
 };
