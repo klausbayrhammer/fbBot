@@ -26,5 +26,8 @@ module.exports = {
             sendImageMessage(sender, 'Who is this guy', data.image)
         })
     },
-    answer: (sender, event) => Promise.resolve(event.message.text === 'Felix Baumgartner')
+    answer: (sender, event) => {
+        console.log('level 0 answer');
+        return Promise.resolve(event.message.text === 'Felix Baumgartner')
+    }
 };

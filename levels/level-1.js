@@ -6,5 +6,8 @@ module.exports = {
     question: (sender, event) => {
         sendTextMessage(sender, 'When was RedBull founded');
     },
-    answer: (sender, event) => Promise.resolve(event.message.text === '1987')
+    answer: (sender, event) => {
+        console.log('level 1 answer');
+        return Promise.resolve(event.message.text === '1987')
+    }
 };

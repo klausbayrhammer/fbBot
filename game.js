@@ -12,6 +12,7 @@ module.exports = (sender, event) => {
     } else {
         console.log(senderMap);
         levels[senderMap[sender].level].answer(sender, event).then(successfullyDone => {
+            console.log('Answer', successfullyDone);
             if (successfullyDone) {
                 senderMap[sender].level = senderMap[sender].level+1;
                 levels[senderMap[sender].level].question(sender, event);
