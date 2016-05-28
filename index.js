@@ -34,7 +34,7 @@ app.post('/webhook/', function (req, res) {
             if(text === 'Hi')
                 sendTextMessage(sender, text);
             else
-                sendImageMessage(sender, 'https://image.redbull.com/rbcom/010/2016-03-22/1331784064832_1/0010/1/150/100/1/nicolas-mller-beim-banked-slalom.jpg')
+                sendImageMessage(sender, 'Who is this guy' , 'https://image.redbull.com/rbcom/010/2016-03-22/1331784064832_1/0010/1/150/100/1/nicolas-mller-beim-banked-slalom.jpg')
             console.log(event);
         }
     }
