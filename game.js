@@ -1,4 +1,5 @@
 const levels = require('./levels/levels');
+const sendTextMessage = require('./utils').sendTextMessage;
 
 const senderMap = {};
 
