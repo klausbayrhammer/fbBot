@@ -15,7 +15,7 @@ function getAthleteById(athleteId) {
             birthplace: athleteObj.birthplace,
             surname: athleteObj.surname,
             firstname: athleteObj.firstname,
-            image: athleteObj.fullBodyImage
+            image: athleteObj.fullbodyimage
         };
     })
 }
