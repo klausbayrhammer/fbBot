@@ -8,16 +8,16 @@ module.exports = (sender, event) => {
     if (!currentSendersLevel) {
         levels[0].question(sender, event);
         senderMap[sender] = {level: 0}
-    } else if (currentSendersLevel === levels.length) {
+    } else if (currentSendersLevel === levels.length-1) {
         sendTextMessage(sender, 'Great you did it');
     } else {
         var currentLevel = senderMap[sender].level;
         if (levels[currentLevel].answer(sender, event)) {
-            sendTextMessage(sender, 'Ready for the next level?');
-            senderMap[sender].level++;
+            senderMap[sender].level = currentLevel+1;
             levels[senderMap[sender].level].question(sender, event);
         } else {
             sendTextMessage(sender, 'Sorry wrong answer');
         }
     }
+    console.log(senderMap)
 };
