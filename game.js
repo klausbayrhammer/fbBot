@@ -4,11 +4,10 @@ const sendTextMessage = require('./utils').sendTextMessage;
 const senderMap = {};
 
 module.exports = (sender, event) => {
-    var currentSendersLevel = senderMap[sender];
-    if (!currentSendersLevel) {
+    if (!senderMap[sender]) {
         levels[0].question(sender, event);
         senderMap[sender] = {level: 0}
-    } else if (currentSendersLevel === levels.length-1) {
+    } else if (senderMap[sender].level === levels.length-1) {
         sendTextMessage(sender, 'Great you did it');
     } else {
         var currentLevel = senderMap[sender].level;

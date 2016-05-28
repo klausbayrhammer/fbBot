@@ -6,7 +6,7 @@ const PAGE_ACCESS_TOKEN = 'EAANRZAubz2BoBACW4RrzdyIhOM8yxt02R2Evl9suoWgzt0gS3hwo
 
 function sendTextMessage(sender, text) {
     messageData = {
-        text: `callback ${text}`
+        text: text
     }
     return sendMessage(sender, messageData)
 }
