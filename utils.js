@@ -8,7 +8,7 @@ function sendTextMessage(sender, text) {
     messageData = {
         text: `callback ${text}`
     }
-    sendMessage(sender, messageData)
+    return sendMessage(sender, messageData)
 }
 
 function sendImageMessage(sender, title, imageurl) {
@@ -24,11 +24,11 @@ function sendImageMessage(sender, title, imageurl) {
             }
         }
     };
-    sendMessage(sender, messageData)
+    return sendMessage(sender, messageData)
 }
 
 function sendMessage(sender, messageData) {
-    request({
+    return request({
         url: 'https://graph.facebook.com/v2.6/me/messages',
         qs: {access_token: PAGE_ACCESS_TOKEN},
         method: 'POST',
