@@ -47,5 +47,8 @@ var server = app.listen(process.env.PORT || 3000,() => {
 const checkIfRedbullFridgePic = require('./utils').checkIfRedbullFridgePic;
 
 app.get('/test', function(req, res){
-    checkIfRedbullFridgePic('/Users/mgutjahr/projects/botcamp/IMG_0047.JPG')
+    var fileUrl = 'https://scontent.xx.fbcdn.net/v/t34.0-12/13295159_10206441181455960_171041825_n.png?oh=840b9b408d2554524b6483737ae60a09&oe=574BDD50';
+    checkIfRedbullFridgePic(fileUrl).then((data) => {
+        console.log(data);
+    })
 });

@@ -12,7 +12,6 @@
     "body-parser": "^1.15.1",
     "express": "^4.13.4",
     "lodash": "^4.13.1",
-    "lwip": "0.0.9",
     "request-promise": "^3.0.0"
   }
 }
