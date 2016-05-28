@@ -1,5 +1,5 @@
-const sendTextMessage = require('./utils').sendTextMessage;
-const sendImageMessage = require('./utils').sendImageMessage;
+const sendTextMessage = require('../utils').sendTextMessage;
+const sendImageMessage = require('../utils').sendImageMessage;
 const request = require('request-promise');
 
 function getAthleteById(athleteId) {
