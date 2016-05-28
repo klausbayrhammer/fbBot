@@ -36,7 +36,7 @@ function sendMessage(sender, messageData) {
             message: messageData
         }
     }).then(function (response) {
-        if (response.body.error) {
+        if (response.body && response.body.error) {
             console.log(response.body.error);
         }
     }).catch(error => {
