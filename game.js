@@ -1,4 +1,4 @@
-const levels = require('./levels');
+const levels = require('./levels/levels');
 
 const senderMap = {};
 
