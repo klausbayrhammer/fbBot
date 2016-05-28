@@ -1,8 +1,8 @@
 var express = require('express');
 const sendTextMessage = require('./utils').sendTextMessage;
 const sendImageMessage = require('./utils').sendImageMessage;
+const request = require('request-promise');
 
-const request = require('request');
 const _ = require('lodash');
 
 var bodyParser = require('body-parser');
@@ -33,9 +33,13 @@ app.post('/webhook/', function (req, res) {
             text = event.message.text;
             if(text === 'Hi')
                 sendTextMessage(sender, text);
-            else
-                sendImageMessage(sender, 'Who is this guy' , 'https://image.redbull.com/rbcom/010/2016-03-22/1331784064832_1/0010/1/150/100/1/nicolas-mller-beim-banked-slalom.jpg')
+            else {
+                getAthleteById("1331578987345").then(data => {
+                    sendImageMessage(sender, 'Who is this guy', data.image)
+                })
+            }
             console.log(event);
+            console.log(sender);
         }
     }
     res.sendStatus(200);
@@ -53,30 +57,26 @@ const challenge = {
     "athleteId": "1331578987345"
 };
 
-
+app.get('/athlete', (req, res) => {
+    getAthleteById("1331578987345").then((x) => {
+        res.send(x)
+    })
+})
 function getAthleteById(athleteId) {
-    request({
+    return request({
         url: `http://api.redbull.com/v2/athletes/${athleteId}/locales/en_int`,
         method: 'GET'
-    }, function(error, response, body) {
-        if (error) {
-            console.log('Error sending message: ', error);
-        } else {
-            const respObj = JSON.parse(body);
-            const athleteObj = respObj.athletes[0];
-            return {
-                name: athleteObj.name,
-                birthdate: athleteObj.birthdate,
-                birthplace: athleteObj.birthplace,
-                surname: athleteObj.surname,
-                firstname: athleteObj.firstname,
-                image: athleteObj.images[0].imageurl
-            };
-        }
+    }).then(function(body) {
+        console.log(arguments)
+        const respObj = JSON.parse(body);
+        const athleteObj = respObj.athletes[0];
+        return {
+            name: athleteObj.name,
+            birthdate: athleteObj.birthdate,
+            birthplace: athleteObj.birthplace,
+            surname: athleteObj.surname,
+            firstname: athleteObj.firstname,
+            image: athleteObj.images[0].imageurl
+        };
     })
 }
-
-app.get('/ch1', function(req, res){
-    console.log()
-    res.sendStatus(200)
-});

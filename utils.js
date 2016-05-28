@@ -1,10 +1,10 @@
-const request = require('request');
+const request = require('request-promise');
 
 const PAGE_ACCESS_TOKEN = 'EAANRZAubz2BoBACqalZCPkekBGJ82MxpoDJC1fZAor0v3t5gGs9zFJ3oHHceLp2GKkNVJrhivgDN2sTIqyWPT4tArebBPYh62bjsnEmfHrZCazsDfyWJtGJccI2w8r6XKmGYGhXrVM9tz1tftUZAyhVJHh53JREBYkczgifiqRgZDZD'
 
 function sendTextMessage(sender, text) {
     messageData = {
-        text:`callback ${text}`
+        text: `callback ${text}`
     }
     sendMessage(sender, messageData)
 }
@@ -28,20 +28,16 @@ function sendImageMessage(sender, title, imageurl) {
 function sendMessage(sender, messageData) {
     request({
         url: 'https://graph.facebook.com/v2.6/me/messages',
-        qs: {access_token:PAGE_ACCESS_TOKEN},
+        qs: {access_token: PAGE_ACCESS_TOKEN},
         method: 'POST',
         json: {
-            recipient: {id:sender},
+            recipient: {id: sender},
             message: messageData
         }
-    }, function(error, response) {
-        if (error) {
-            console.log('Error sending message: ', error);
-        } else if (response.body.error) {
-            console.log('Error: ', response.body.error);
-        }
+    }).then(function (response) {
+    }).catch(error => {
+        console.log('Error sending message: ', error);
     });
-
 }
 
 module.exports = {
