@@ -27,6 +27,21 @@ function sendImageMessage(sender, title, imageurl) {
     return sendMessage(sender, messageData)
 }
 
+function sendPostbackButtonMessage(sender, buttonConfig) {
+    const buttons = _.map(buttonConfig, e => ({type:'postback', title: e, payload: e}));
+    messageData = {
+        "attachment": {
+            "type": "template",
+            "payload": {
+                "template_type": "button",
+                "text":"Who do you really mean",
+                "buttons": buttons
+            }
+        }
+    };
+    return sendMessage(sender, messageData)
+}
+
 function sendMessage(sender, messageData) {
     return request({
         url: 'https://graph.facebook.com/v2.6/me/messages',
@@ -99,5 +114,6 @@ module.exports = {
     sendTextMessage: sendTextMessage,
     sendImageMessage: sendImageMessage,
     checkIfRedbullFridgePic: checkIfRedbullFridgePic,
-    searchForAthletes: searchForAthletes
+    searchForAthletes: searchForAthletes,
+    sendPostbackButtonMessage: sendPostbackButtonMessage
 };
