@@ -1,6 +1,6 @@
 const request = require('request-promise');
 
-const PAGE_ACCESS_TOKEN = 'EAANRZAubz2BoBAMZCKOxBSi0ZAZCet2kHifsvW76kTHIUYZC5cfEYocrtxBZAL9LzdFrMyrZCSvsGeVuPEfjc4LaocJ71ZCovwVCye9jU8iaLkHqis9IQ2HasZBgJCR9pZAukvgBYv31w6BtSzLFYgoFZAt0ZAeIT8NqAYz4B3xVly1FwwZDZD'
+const PAGE_ACCESS_TOKEN = 'EAANRZAubz2BoBAI6OdQVn6m1F3ZB7GuFpYSvp2hdZAjK6Gjo3w6BUYTMoHzWj1OZC39R699xqFmk1QpPYGaMGEMEk0vUxqZBc9P47aRGK6qOskIK3DQa9is2ZCLQePxLWIvBpdMoyk8Y92xohLK5nZCYu3rm3bW9gZBpCEzsqE571wZDZD'
 
 function sendTextMessage(sender, text) {
     messageData = {
