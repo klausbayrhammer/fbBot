@@ -7,9 +7,13 @@ app.get('/', (req, res) => {
     console.log(req);
     res.end('ok');
 });
-app.get('/webhook/', (req,res) => {
-	console.log(req)
-	res.send('webhook received');
+
+app.get('/webhook/', function (req, res) {
+    if (req.query['hub.verify_token'] === 'thisIsTheHotShit') {
+        res.send(req.query['hub.challenge']);
+    }
+ console.log(req);
+    res.send('Error, wrong validation token');
 });
 var server = app.listen(process.env.PORT || 3000,() => {
     var host = server.address().address;
