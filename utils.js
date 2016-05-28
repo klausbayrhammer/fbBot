@@ -1,4 +1,6 @@
 const request = require('request-promise');
+const fs = require('fs');
+const lwip = require('lwip');
 
 const PAGE_ACCESS_TOKEN = 'EAANRZAubz2BoBACqalZCPkekBGJ82MxpoDJC1fZAor0v3t5gGs9zFJ3oHHceLp2GKkNVJrhivgDN2sTIqyWPT4tArebBPYh62bjsnEmfHrZCazsDfyWJtGJccI2w8r6XKmGYGhXrVM9tz1tftUZAyhVJHh53JREBYkczgifiqRgZDZD'
 
@@ -43,7 +45,33 @@ function sendMessage(sender, messageData) {
     });
 }
 
+function checkIfRedbullFridgePic(filePath) {
+    lwip.open(filePath, function(err, image) {
+        image.resize(320, function(err, image) {
+            image.writeFile('./test.jpg', function(err) {
+
+                const formData = {
+                    token: '27317e6860f549c4',
+                    image: fs.createReadStream('./test.jpg')
+                };
+
+                request({
+                    method: 'POST',
+                    url: 'https://search.craftar.net/v1/search',
+                    formData: formData,
+                    json: true
+                }).then(function(body) {
+                    return body.results.length != 0;
+                })
+
+            })
+        })
+    })
+
+}
+
 module.exports = {
     sendTextMessage: sendTextMessage,
-    sendImageMessage: sendImageMessage
+    sendImageMessage: sendImageMessage,
+    checkIfRedbullFridgePic: checkIfRedbullFridgePic
 };

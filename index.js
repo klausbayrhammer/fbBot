@@ -37,3 +37,10 @@ var server = app.listen(process.env.PORT || 3000,() => {
 
     console.log('App listening at http://%s:%s', host, port);
 });
+
+
+const checkIfRedbullFridgePic = require('./utils').checkIfRedbullFridgePic;
+
+app.get('/test', function(req, res){
+    checkIfRedbullFridgePic('/Users/mgutjahr/projects/botcamp/IMG_0047.JPG')
+});
