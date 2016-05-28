@@ -2,6 +2,9 @@ var express = require('express');
 const sendTextMessage = require('./utils').sendTextMessage;
 const sendImageMessage = require('./utils').sendImageMessage;
 
+const request = require('request');
+const _ = require('lodash');
+
 var bodyParser = require('body-parser');
 const VERIFY_TOKEN = 'thisIsTheHotShit';
 
@@ -43,4 +46,37 @@ var server = app.listen(process.env.PORT || 3000,() => {
     var port = server.address().port;
 
     console.log('App listening at http://%s:%s', host, port);
+});
+
+const challenge = {
+    "challengeType": "guessAthlete",
+    "athleteId": "1331578987345"
+};
+
+
+function getAthleteById(athleteId) {
+    request({
+        url: `http://api.redbull.com/v2/athletes/${athleteId}/locales/en_int`,
+        method: 'GET'
+    }, function(error, response, body) {
+        if (error) {
+            console.log('Error sending message: ', error);
+        } else {
+            const respObj = JSON.parse(body);
+            const athleteObj = respObj.athletes[0];
+            return {
+                name: athleteObj.name,
+                birthdate: athleteObj.birthdate,
+                birthplace: athleteObj.birthplace,
+                surname: athleteObj.surname,
+                firstname: athleteObj.firstname,
+                image: athleteObj.images[0].imageurl
+            };
+        }
+    })
+}
+
+app.get('/ch1', function(req, res){
+    console.log()
+    res.sendStatus(200)
 });
