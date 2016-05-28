@@ -7,7 +7,10 @@ app.get('/', (req, res) => {
     console.log(req);
     res.end('ok');
 });
-
+app.get('/webhook/', (req,res) => {
+	console.log(req)
+	res.send('webhook received');
+});
 var server = app.listen(process.env.PORT || 3000,() => {
     var host = server.address().address;
     var port = server.address().port;
