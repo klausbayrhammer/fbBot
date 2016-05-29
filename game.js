@@ -1,3 +1,5 @@
+"use strict";
+
 const levels = require('./levels/levels');
 const sendTextMessage = require('./utils').sendTextMessage;
 const sendImageMessage = require('./utils').sendImageMessage;
