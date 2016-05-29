@@ -17,7 +17,7 @@ module.exports = (sender, event) => {
                 if (senderMap[sender].level === levels.length) {
                     console.log('Done');
                     sendTextMessage(sender, 'Holy cow you did it!').then(() => {
-                        sendImageMessage(sender, 'Use this QR code to fetch you price from the RedBull booth', 'http://api.qrserver.com/v1/create-qr-code/?color=000000&bgcolor=FFFFFF&data=dawdawdawd&qzone=1&margin=0&size=625x625&ecc=L')
+                        sendImageMessage(sender, 'Use this QR code to fetch you price from the RedBull booth', 'http://api.qrserver.com/v1/create-qr-code/?color=000000&bgcolor=FFFFFF&data=daawd&qzone=1&margin=0&size=150x150&ecc=L')
                     });
                 } else {
                     console.log('Next question');
