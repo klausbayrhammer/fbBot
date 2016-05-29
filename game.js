@@ -17,7 +17,7 @@ module.exports = (sender, event) => {
                 if (senderMap[sender].level === levels.length) {
                     console.log('Done');
                     sendTextMessage(sender, 'Holy cow you did it!').then(() => {
-                        sendImageMessage(sender, 'Use this QR code to fetch you price from the RedBull booth', 'http://www.healthcaremarketingblog.de/wp-content/uploads/2012/07/QR-Code-Digitaleshealthcaremarketing_597_links.png')
+                        sendImageMessage(sender, 'Use this QR code to fetch you price from the RedBull booth', 'http://s33.postimg.org/3yusjpkin/static_qr_code_without_logo_facebook.jpg')
                     });
                 } else {
                     console.log('Next question');
