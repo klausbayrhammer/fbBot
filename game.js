@@ -14,8 +14,10 @@ module.exports = (sender, event) => {
             if (response.success) {
                 senderMap[sender].level = senderMap[sender].level + 1;
                 if (senderMap[sender].level === levels.length) {
+                    console.log('Done');
                     sendTextMessage(sender, 'Great you did it');
                 } else {
+                    console.log('Next question');
                     levels[senderMap[sender].level].question(sender, event);
                 }
             } else if(!response.skipDefaultMessage) {

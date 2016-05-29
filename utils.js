@@ -109,10 +109,33 @@ function searchForAthletes(query) {
     });
 }
 
+function getNextRBTvShow() {
+    return request({
+        url: 'https://api-v2.redbull.tv/views/calendar',
+        method: 'GET',
+        headers: {
+            Authorization: 'Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJhZGRyZXNzIjoiMTc4LjE5LjIwOS4yMDYiLCJnZW5kZXIiOiJtYWxlIiwib3MiOiJvc194XzEwXzEwX3lvc2VtaXRlIiwib3NfZmFtaWx5Ijoib3NfeCIsIm9mZnNldCI6MCwib3NfdmVyc2lvbiI6IjEwXzEwXzUiLCJzZXNzaW9uX2lkIjoic2Vzc2lvbnM6OjEwNDQwODkwIiwiaHlkcmF0ZSI6ZmFsc2UsImxvY2FsZSI6ImVuIiwidWEiOiJNb3ppbGxhLzUuMCAoTWFjaW50b3NoOyBJbnRlbCBNYWMgT1MgWCAxMF8xMF81KSBBcHBsZVdlYktpdC81MzcuMzYgKEtIVE1MLCBsaWtlIEdlY2tvKSBDaHJvbWUvNTAuMC4yNjYxLjEwMiBTYWZhcmkvNTM3LjM2IiwidHlwZSI6InNlc3Npb24iLCJxdWFsaXR5IjpudWxsLCJidWlsZCI6IjQuMC4wIiwibG9jYXRpb24iOnsic3ViZGl2aXNpb24iOm51bGwsImNpdHkiOm51bGwsInRpbWV6b25lIjpudWxsLCJsYXRpdHVkZSI6NTEuMCwiY291bnRyeV9uYW1lIjoiR2VybWFueSIsImxvbmd0aXR1ZGUiOjkuMCwicG9zdGFsX2NvZGUiOm51bGwsInN1YmRpdmlzaW9uX2lzbyI6bnVsbCwiY291bnRyeV9pc28iOiJERSJ9LCJleGNsdWRlIjpudWxsLCJmYW1pbHkiOiJjaHJvbWUiLCJjYXRlZ29yeSI6InBlcnNvbmFsX2NvbXB1dGVyIiwiaWF0IjoxNDY0NDI5ODU3LCJ0aW1lc3RhbXAiOjE0NjQ0Mjk4NTc5NjZ9.H25fl3mNRY1XOYGFodTJDGBsZB8AcSL8a6TVAtZouUY='
+        },
+        json: true
+    }).then(data => {
+        var upcomingEvent = _.find(data.blocks, e => e.label === 'Upcoming Live Events');
+        const collectionLink = upcomingEvent.collection.resource.links.self;
+        return request({
+            url: `https://api-v2.redbull.tv${collectionLink}`,
+            method: 'GET',
+            headers: {
+                Authorization: 'Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJhZGRyZXNzIjoiMTc4LjE5LjIwOS4yMDYiLCJnZW5kZXIiOiJtYWxlIiwib3MiOiJvc194XzEwXzEwX3lvc2VtaXRlIiwib3NfZmFtaWx5Ijoib3NfeCIsIm9mZnNldCI6MCwib3NfdmVyc2lvbiI6IjEwXzEwXzUiLCJzZXNzaW9uX2lkIjoic2Vzc2lvbnM6OjEwNDQwODkwIiwiaHlkcmF0ZSI6ZmFsc2UsImxvY2FsZSI6ImVuIiwidWEiOiJNb3ppbGxhLzUuMCAoTWFjaW50b3NoOyBJbnRlbCBNYWMgT1MgWCAxMF8xMF81KSBBcHBsZVdlYktpdC81MzcuMzYgKEtIVE1MLCBsaWtlIEdlY2tvKSBDaHJvbWUvNTAuMC4yNjYxLjEwMiBTYWZhcmkvNTM3LjM2IiwidHlwZSI6InNlc3Npb24iLCJxdWFsaXR5IjpudWxsLCJidWlsZCI6IjQuMC4wIiwibG9jYXRpb24iOnsic3ViZGl2aXNpb24iOm51bGwsImNpdHkiOm51bGwsInRpbWV6b25lIjpudWxsLCJsYXRpdHVkZSI6NTEuMCwiY291bnRyeV9uYW1lIjoiR2VybWFueSIsImxvbmd0aXR1ZGUiOjkuMCwicG9zdGFsX2NvZGUiOm51bGwsInN1YmRpdmlzaW9uX2lzbyI6bnVsbCwiY291bnRyeV9pc28iOiJERSJ9LCJleGNsdWRlIjpudWxsLCJmYW1pbHkiOiJjaHJvbWUiLCJjYXRlZ29yeSI6InBlcnNvbmFsX2NvbXB1dGVyIiwiaWF0IjoxNDY0NDI5ODU3LCJ0aW1lc3RhbXAiOjE0NjQ0Mjk4NTc5NjZ9.H25fl3mNRY1XOYGFodTJDGBsZB8AcSL8a6TVAtZouUY='
+            },
+            json: true
+        });
+    }).then(data => data.items[0].title)
+}
+
 module.exports = {
     sendTextMessage: sendTextMessage,
     sendImageMessage: sendImageMessage,
     checkIfRedbullFridgePic: checkIfRedbullFridgePic,
     searchForAthletes: searchForAthletes,
-    sendPostbackButtonMessage: sendPostbackButtonMessage
+    sendPostbackButtonMessage: sendPostbackButtonMessage,
+    getNextRBTvShow: getNextRBTvShow
 };

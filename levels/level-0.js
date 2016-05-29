@@ -35,7 +35,7 @@ module.exports = {
                 resolve({success: true})
             }
             if(event.message && event.message.text) {
-                return searchForAthletes(event.message.text).then(athletes => {
+                searchForAthletes(event.message.text).then(athletes => {
                     if(!_.isEmpty(athletes)) {
                         sendPostbackButtonMessage(sender, athletes);
                         resolve({success:false, skipDefaultMessage:true})

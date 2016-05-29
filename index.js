@@ -1,8 +1,9 @@
 var express = require('express');
 const request = require('request-promise');
 const game = require('./game');
-
 var bodyParser = require('body-parser');
+const getNextRBTvShow = require('./utils').getNextRBTvShow;
+
 const VERIFY_TOKEN = 'thisIsTheHotShit';
 
 var app = express();
@@ -50,3 +51,9 @@ app.get('/test', function(req, res){
         res.send( data );
     })
 });
+
+app.get('/nextRbTvShow', (req, res) => {
+    getNextRBTvShow().then((data) => {
+        console.log(data);
+    });
+})
