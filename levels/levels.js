@@ -1,6 +1,6 @@
-const levelZero = require('./level-0');
-const levelOne = require('./level-1');
-const levelTwo = require('./level-2');
+const levelRbFounded = require('./level-rb-founded');
+const levelAthlete = require('./level-athlete');
+const levelFridge = require('./level-fridge');
 const levelRbTv = require('./level-rbtv');
 
-module.exports = [levelOne, levelZero, levelRbTv, levelTwo];
+module.exports = [levelRbFounded, levelAthlete, levelRbTv, levelFridge];

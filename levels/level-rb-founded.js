@@ -4,10 +4,9 @@ const request = require('request-promise');
 
 module.exports = {
     question: (sender, event) => {
-        sendTextMessage(sender, 'When was RedBull founded');
+        sendTextMessage(sender, 'Ok here we go! When was RedBull founded');
     },
     answer: (sender, event) => {
-        console.log('level 1 answer');
         return Promise.resolve({success: event.message.text === '1987'})
     }
 };

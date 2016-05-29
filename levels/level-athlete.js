@@ -26,7 +26,7 @@ function getAthleteById(athleteId) {
 module.exports = {
     question: (sender, event) => {
         getAthleteById("1331578987345").then(data => {
-            sendImageMessage(sender, 'Who is this guy', data.image)
+            sendImageMessage(sender, 'That was easy! Next question: Who is this guy', data.image)
         })
     },
     answer: (sender, event) => {

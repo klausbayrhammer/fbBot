@@ -1,5 +1,6 @@
 const levels = require('./levels/levels');
 const sendTextMessage = require('./utils').sendTextMessage;
+const sendImageMessage = require('./utils').sendImageMessage;
 
 const senderMap = {};
 
@@ -15,7 +16,9 @@ module.exports = (sender, event) => {
                 senderMap[sender].level = senderMap[sender].level + 1;
                 if (senderMap[sender].level === levels.length) {
                     console.log('Done');
-                    sendTextMessage(sender, 'Great you did it');
+                    sendTextMessage(sender, 'Holy cow you did it!').then(() => {
+                        sendImageMessage(sender, 'Use this QR code to fetch you price from the RedBull booth', 'http://api.qrserver.com/v1/create-qr-code/?color=000000&bgcolor=FFFFFF&data=dawdawdawd&qzone=1&margin=0&size=625x625&ecc=L')
+                    });
                 } else {
                     console.log('Next question');
                     levels[senderMap[sender].level].question(sender, event);

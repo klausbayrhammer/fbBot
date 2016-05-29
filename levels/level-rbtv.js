@@ -4,7 +4,7 @@ const levenshtein = require('fast-levenshtein');
 
 module.exports = {
     question: (sender, event) => {
-        sendTextMessage(sender, 'What is the next upcoming Show on redbull.tv');
+        sendTextMessage(sender, 'Not bad! What is the next upcoming show on redbull.tv');
     },
     answer: (sender, event) => {
         return getNextRBTvShow().then(showTitle => ({
