@@ -4,4 +4,4 @@ const levelFridge = require('./level-fridge');
 const levelRbTv = require('./level-rbtv');
 const entry = require('./level-entry');
 
-module.exports = [entry, levelRbFounded, levelAthlete, levelRbTv, levelFridge];
+module.exports = [entry, levelRbFounded, levelAthlete, levelFridge, levelRbTv];
