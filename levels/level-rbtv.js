@@ -8,7 +8,7 @@ module.exports = {
     },
     answer: (sender, event) => {
         return getNextRBTvShow().then(showTitle => ({
-            success: levenshtein.get(showTitle.toUpperCase(), event.message.text.toUpperCase()) < 4
+            success: levenshtein.get(showTitle.toUpperCase(), event.message.text.toUpperCase()) < 15
         }));
     }
 };
