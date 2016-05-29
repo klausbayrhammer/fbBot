@@ -7,7 +7,7 @@ const sendImageMessage = require('./utils').sendImageMessage;
 let senderMap = {};
 
 module.exports = (sender, event) => {
-    if (event.message && event.message.text.toUpperCase() === 'restart'.toUpperCase()) {
+    if (event.message && event.message.text && event.message.text.toUpperCase() === 'restart'.toUpperCase()) {
         senderMap = {};
     } else {
         if (!senderMap[sender]) {
